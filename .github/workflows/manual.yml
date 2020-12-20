@@ -10,6 +10,4 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: gh
-        run: gh auth login --with-token <<<'${{ secrets.GITHUB_TOKEN }}' && gh repo view
-      - name: git
-        run: git tag ${{ github.event.inputs.tag }} && git push origin --tags
+        run:  gh repo view
