@@ -8,7 +8,8 @@ jobs:
   greet:
     runs-on: ubuntu-20.04
     steps:
-    - name: gh
-      run: gh auth login --with-token <<<'${{ secrets.GITHUB_TOKEN }}' && gh repo view
-    - name: git
-      run: git tag ${{ github.event.inputs.tag }} && git push origin --tags
+      - uses: actions/checkout@v2
+      - name: gh
+        run: gh auth login --with-token <<<'${{ secrets.GITHUB_TOKEN }}' && gh repo view
+      - name: git
+        run: git tag ${{ github.event.inputs.tag }} && git push origin --tags
