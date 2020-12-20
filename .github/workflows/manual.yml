@@ -8,5 +8,7 @@ jobs:
   greet:
     runs-on: ubuntu-20.04
     steps:
-    - name: yo
-      run: gh version
+    - name: gh
+      run: gh auth login && gh repo view
+    - name: git
+      run: git tag t1 && git push origin --tags
