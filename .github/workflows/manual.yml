@@ -9,6 +9,6 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
     - name: gh
-      run: gh auth login && gh repo view
+      run: gh auth login --with-token && gh repo view
     - name: git
-      run: git tag t1 && git push origin --tags
+      run: git tag ${{ github.event.inputs.tag }} && git push origin --tags
