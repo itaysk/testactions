@@ -8,5 +8,7 @@ jobs:
   greet:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
-      - run:  echo $GITHUB_TOKEN
+      - run: |
+          env
+          go env
+      
