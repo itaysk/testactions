@@ -1,14 +1,14 @@
 name: Manual workflow
-on:
-  workflow_dispatch:
-    inputs:
-      tag:
-        required: true
+on: workflow_dispatch
 jobs:
-  greet:
+  host:
     runs-on: ubuntu-20.04
     steps:
       - run: |
           env
           go env
-      
+      - run: |
+          docker run --entrypoint sh golang1.16-alpine env; go env
+      - run: |
+          docker run --entrypoint sh golang1.16-buster env; go env
+
