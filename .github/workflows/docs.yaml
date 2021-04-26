@@ -11,7 +11,8 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - run: |
-          if [ -z ${{ github.event.inputs.tag }} ]; then
+          $VERSION=${{ github.event.inputs.tag }} 
+          if [ -z $VERSION ]; then
             VERSION=$(echo ${{ github.ref }} | sed -e "s#refs/tags/##g")
           fi
           echo $VERSION
