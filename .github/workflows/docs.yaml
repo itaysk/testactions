@@ -2,7 +2,15 @@ on:
   push:
     tags:
       - "v*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        required: false
 jobs:
   test:
     steps:
-      - run: echo hi
+      - run: |
+          if [ -z ${{ github.event.inputs.tag }} ]; then
+            VERSION=$(echo ${{ github.ref }} | sed -e "s#refs/tags/##g")
+          fi
+          echo $VERSION
