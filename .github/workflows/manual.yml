@@ -8,9 +8,4 @@ jobs:
     steps:
       - run: |
           env
-          go env
-      - run: |
-          docker run --entrypoint sh golang:1.16-alpine -c "env; go env"
-      - run: |
-          docker run --entrypoint sh golang:1.16-buster -c "env; go env"
 
