@@ -8,6 +8,7 @@ on:
         required: false
 jobs:
   test:
+    runs-on: ubuntu-20.04
     steps:
       - run: |
           if [ -z ${{ github.event.inputs.tag }} ]; then
