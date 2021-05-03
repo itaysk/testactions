@@ -11,7 +11,7 @@ jobs:
           docker run --name tracee --rm --privileged -v /lib/modules/:/lib/modules/:ro -v /usr/src:/usr/src:ro -v /tmp/tracee:/tmp/tracee aquasec/tracee:latest >/tmp/tracee/output &
       - run:
           sleep 20
-      - run: strace ls
+      - run: strace ls >/dev/null
       - run: cat /tmp/tracee/output
       - uses: actions/upload-artifact@v2
         with:
