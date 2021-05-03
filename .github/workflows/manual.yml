@@ -7,9 +7,10 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - run: |
-          #while true; do echo a>>/tmp/tracee-out; sleep 1; done &
-          mkdir /tmp/tracee
-          docker run --name tracee --rm --privileged -v /lib/modules/:/lib/modules/:ro -v /usr/src:/usr/src:ro -v /tmp/tracee:/tmp/tracee aquasec/tracee:latest trace -o out-file:/tmp/tracee/output &
+          mkdir /tmp/tracee && cd /tmp/tracee
+          curl -LO https://github.com/aquasecurity/tracee/releases/download/v0.5.1/tracee.tar.gz
+          tar -xzf ./tracee.tar.gz
+          sudo ./dist/tracee-ebpf -o out-file:/tmp/tracee/output
           sleep 5
       - run: strace ls
       - uses: actions/upload-artifact@v2
