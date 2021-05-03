@@ -8,16 +8,14 @@ jobs:
     steps:
       - run: |
           mkdir /tmp/tracee && cd /tmp/tracee
-          curl -LO https://github.com/aquasecurity/tracee/releases/download/v0.5.1/tracee.tar.gz
-          tar -xzf ./tracee.tar.gz
-          sudo ./dist/tracee-ebpf -o out-file:/tmp/tracee/output
+          docker run --name tracee --rm --privileged -v /lib/modules/:/lib/modules/:ro -v /usr/src:/usr/src:ro -v /tmp/tracee:/tmp/tracee aquasec/tracee:latest trace -o out-file:/tmp/tracee/output &
           sleep 5
       - run: strace ls
       - uses: actions/upload-artifact@v2
         with:
           name: tracee-out
           path: /tmp/tracee/output
-      - run: cat /tmp/tracee/output
+      - run: docker cp tracee:/tmp/tracee/output ./yo && cat ./yo
       
     
           
