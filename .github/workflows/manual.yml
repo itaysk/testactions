@@ -8,7 +8,7 @@ jobs:
     steps:
       - run: |
           #while true; do echo a>>/tmp/tracee-out; sleep 1; done &          
-          docker run --name tracee --rm --privileged -v /lib/modules/:/lib/modules/:ro -v /usr/src:/usr/src:ro -v /tmp/tracee:/tmp/tracee aquasec/tracee:latest trace >/tmp/tracee-out
+          docker run --name tracee --rm --privileged -v /lib/modules/:/lib/modules/:ro -v /usr/src:/usr/src:ro -v /tmp/tracee:/tmp/tracee aquasec/tracee:latest trace >/tmp/tracee-out &
           sleep 10
       - run: strace ls
       - uses: actions/upload-artifact@v2
