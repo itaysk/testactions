@@ -8,7 +8,8 @@ jobs:
     steps:
       - run: |
           mkdir /tmp/tracee
-          while true; do echo a>>/tmp/tracee/out; sleep 1; done &          
+          #while true; do echo a>>/tmp/tracee/out; sleep 1; done &          
+          docker run --name tracee --rm --privileged -v /lib/modules/:/lib/modules/:ro -v /usr/src:/usr/src:ro -v /tmp/tracee:/tmp/tracee aquasec/tracee:latest trace -t event=ptrace >/tmp/tracee/out &
       - run: strace ls
       - uses: actions/upload-artifact@v2
         with:
