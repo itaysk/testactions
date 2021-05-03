@@ -10,6 +10,7 @@ jobs:
           mkdir /tmp/tracee && cd /tmp/tracee
           docker run --name tracee --rm --privileged -v /lib/modules/:/lib/modules/:ro -v /usr/src:/usr/src:ro -v /tmp/tracee:/tmp/tracee aquasec/tracee:latest trace -o out-file:/tmp/tracee/output &
           sleep 5
+          cat /tmp/tracee/output
       - run: strace ls
       - uses: actions/upload-artifact@v2
         with:
