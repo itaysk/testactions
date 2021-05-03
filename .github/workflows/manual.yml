@@ -9,6 +9,7 @@ jobs:
       - run: |
           docker run --name tracee --rm --privileged -v /lib/modules/:/lib/modules/:ro -v /usr/src:/usr/src:ro -v /tmp/tracee:/tmp/tracee -d aquasec/tracee:latest trace -t event=ptrace -o out-file:/tmp/tracee/test
       - run: strace ls
+      - run: cat /tmp/tracee/test
     
           
 
