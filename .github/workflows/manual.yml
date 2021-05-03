@@ -8,14 +8,14 @@ jobs:
     steps:
       - run: |
           #while true; do echo a>>/tmp/tracee-out; sleep 1; done &          
-          docker run --name tracee --rm --privileged -v /lib/modules/:/lib/modules/:ro -v /usr/src:/usr/src:ro -v /tmp/tracee:/tmp/tracee aquasec/tracee:latest trace >/tmp/tracee-out &
-          sleep 10
+          docker run --name tracee --rm --privileged -v /lib/modules/:/lib/modules/:ro -v /usr/src:/usr/src:ro -v /tmp/tracee:/tmp/tracee aquasec/tracee:latest trace -o out-file:/tmp/tracee/out &
+          sleep 5
       - run: strace ls
       - uses: actions/upload-artifact@v2
         with:
           name: tracee-out
-          path: /tmp/tracee-out
-      - run: cat /tmp/tracee-out
+          path: /tmp/tracee/out
+      - run: cat /tmp/tracee/out
       
     
           
