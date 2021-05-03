@@ -8,7 +8,7 @@ jobs:
     steps:
       - run: |
           mkdir /tmp/tracee
-          while true; do echo a>>/tmp/test; sleep 1; done &          
+          while true; do echo a>>/tmp/tracee/out; sleep 1; done &          
       - run: strace ls
       - uses: actions/upload-artifact@v2
         with:
