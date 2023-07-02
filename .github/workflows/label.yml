@@ -12,7 +12,7 @@ jobs:
         with:
           script: |
             github.discussions.createLabel({
-              discussion_number: context.payload.discussion.number,
+              discussion_number: context.discussion.number,
               name: 'needs-triage',
               color: '000000',
               description: 'This discussion needs triage'
