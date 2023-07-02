@@ -2,6 +2,10 @@ name: label discussions
 on: 
   discussion:
     types: [created]
+  workflow_dispatch:
+    inputs:
+      discussion_number:
+        required: true
 jobs:
   host:
     runs-on: ubuntu-latest
@@ -12,7 +16,7 @@ jobs:
         with:
           script: |
             github.discussions.createLabel({
-              discussion_number: context.discussion.number,
+                discussion_number: ${{ github.event.inputs.discussion_number }} || context.discussion.number,
               name: 'needs-triage',
               color: '000000',
               description: 'This discussion needs triage'
