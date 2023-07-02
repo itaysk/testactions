@@ -1,0 +1,19 @@
+name: label discussions
+on: 
+  discussion:
+    types: [created]
+jobs:
+  host:
+    runs-on: ubuntu-latest
+    permissions:
+      discussions: write
+    steps:
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            github.discussions.createLabel({
+              discussion_number: context.payload.discussion.number,
+              name: 'needs-triage',
+              color: '000000',
+              description: 'This discussion needs triage'
+            })
