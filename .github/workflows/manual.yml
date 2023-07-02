@@ -1,22 +1,12 @@
 name: Manual workflow
 on: 
   workflow_dispatch:
-  push:
 jobs:
   host:
     runs-on: ubuntu-20.04
     steps:
       - run: |
-          mkdir /tmp/tracee
-          docker run --name tracee --rm --privileged -v /lib/modules/:/lib/modules/:ro -v /usr/src:/usr/src:ro -v /tmp/tracee:/tmp/tracee aquasec/tracee:latest >/tmp/tracee/output &
-      - run:
-          sleep 20
-      - run: strace ls >/dev/null
-      - run: cat /tmp/tracee/output
-      - uses: actions/upload-artifact@v2
-        with:
-          name: tracee-out
-          path: /tmp/tracee/output
+         echo hi 
       
     
           
