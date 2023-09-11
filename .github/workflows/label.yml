@@ -13,5 +13,7 @@ jobs:
       discussions: write
     steps:
       - run: |
-          echo ${{ toJson(github.event) }}
+          cat << OBJECT
+          ${{ toJson(github) }}
+          OBJECT
       
