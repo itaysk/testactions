@@ -13,5 +13,5 @@ jobs:
       discussions: write
     steps:
       - run: |
-          echo ${{ github.event }}
+          echo ${{ github.event.discussion }}
       
