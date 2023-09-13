@@ -4,4 +4,4 @@ on:
     types: [created]
 jobs:
   test:
-    uses: itaysk/trivy-discussion-labeler@latest
+    uses: itaysk/trivy-discussion-labeler@main
