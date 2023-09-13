@@ -4,4 +4,4 @@ on:
     types: [created]
 jobs:
   label:
-    uses: ./actions/trivy-discussion-labeler
+    uses: ./actions/trivy-discussion-labeler@main
