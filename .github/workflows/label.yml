@@ -1,19 +1,7 @@
 name: label discussions
-on: 
+on:
   discussion:
     types: [created]
-  workflow_dispatch:
-    inputs:
-      discussion_number:
-        required: true
 jobs:
   test:
-    runs-on: ubuntu-latest
-    permissions:
-      discussions: write
-    steps:
-      - run: |
-          cat << OBJECT
-          ${{ toJson(github) }}
-          OBJECT
-      
+    uses: itaysk/trivy-discussion-labeler
