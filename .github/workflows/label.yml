@@ -3,5 +3,5 @@ on:
   discussion:
     types: [created]
 jobs:
-  test:
-    uses: itaysk/trivy-discussion-labeler@main
+  label:
+    uses: ./actions/trivy-discussion-labeler
