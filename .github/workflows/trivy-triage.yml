@@ -1,4 +1,4 @@
-name: label discussions
+name: test trivy triage
 on:
   discussion:
     types: [created]

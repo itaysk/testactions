@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 set -x
 
-# acquire context
+# setup
 discussion_created_json="$1"
 config_discussion_labels="$2"
 
@@ -9,10 +9,12 @@ discussion_category_name=$(jq -r '.category.name' "$discussion_created_json")
 discussion_node_id=$(jq -r '.node_id' "$discussion_created_json")
 discussion_body=$(jq -r '.body' "$discussion_created_json")
 
-# find labels in discussion body
+# find relavant labels in discussion
+# trivy's discussion form asks for scanner and target as select boxes
 if [ "$discussion_category_name" != 'Ideas' ]; then exit 0; fi
 discussion_target=$(awk -v RS="\\\\n\\\\n" '/^### Target/ {getline; print;}' <<< "$discussion_body")
 discussion_scanner=$(awk -v RS="\\\\n\\\\n" '/^### Scanner/ {getline; print;}' <<< "$discussion_body")
+# find the corresponding labels for the selected options
 label_target=$(awk -F: "/^$discussion_target/ "'{print $2}' <"$config_discussion_labels")
 label_scanner=$(awk -F: "/^$discussion_scanner/ "'{print $2}' <"$config_discussion_labels")
 
