@@ -13,3 +13,5 @@ runs:
         ${{ github.action_path }}/discussion-created.sh "./discussion-created.json" "$config_discussion_labels"
       if: ${{ github.event_name == 'discussion' && github.event.action == 'created' }}
       shell: bash
+      env:
+        GH_TOKEN: ${{ github.token }}
