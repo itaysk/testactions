@@ -4,7 +4,6 @@ runs:
   using: "composite"
   steps:
     - run: |
-        set -x
         echo '${{ toJson(github.event.discussion) }}' > ./discussion-created.json
         ${{ github.action_path }}/discussion-created.sh ./discussion-created.json
       if: ${{ github.event_name == 'discussion' && github.event.action == 'created' }}

@@ -1,3 +1,4 @@
+set -x
 # acquire context
 discussion_created_json="$1"
 discussion_category_name=$(jq '.category.name' "$discussion_created_json")
