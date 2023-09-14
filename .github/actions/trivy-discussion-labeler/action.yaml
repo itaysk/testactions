@@ -1,7 +1,0 @@
-name: 'trivy-discussion-labeler'
-description: 'Automatically apply labels to discussions'
-runs:
-  using: "composite"
-  steps:
-    - run: ${{ github.action_path }}/main.sh
-      shell: bash
