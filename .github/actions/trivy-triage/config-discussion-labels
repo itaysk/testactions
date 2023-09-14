@@ -1,14 +1,13 @@
 //targets
-Container Image:MDU6TGFiZWwyNTk4MTQxNDQ5
-Filesystem:MDU6TGFiZWwyNTk4MTQxNDUw
-Git Repository:MDU6TGFiZWwyNTk4MTQxNDUy
-Virtual Machine Image:MDU6TGFiZWwyNTk4MTQxNDU0
-Kubernetes:MDU6TGFiZWwyNTk4MTQxNDU4
-AWS:LA_kwDOE0GiPM8AAAABYmqMGg
-SBOM:invalid
+Container Image:LA_kwDOCsUTCM75TTQU
+Filesystem:LA_kwDOCsUTCM75TTQX
+Git Repository:LA_kwDOCsUTCM75TTQk
+Virtual Machine Image:LA_kwDOCsUTCM8AAAABMpz1bw
+Kubernetes:LA_kwDOCsUTCM75TTQv
+AWS:LA_kwDOCsUTCM8AAAABMpz1aA
 
 //scanners
-Vulnerability:MDU6TGFiZWwyNTk4MTQxNDU2
-Misconfiguration:MDU6TGFiZWwyNTk4MTQxNDYw
-License:MDU6TGFiZWwyNTk4MTQxNDYy
-Secret:MDU6TGFiZWwyNTk4MTQxNDY1
+Vulnerability:LA_kwDOCsUTCM75TTPa
+Misconfiguration:LA_kwDOCsUTCM75TTP8
+License:LA_kwDOCsUTCM77ztRR
+Secret:LA_kwDOCsUTCM75TTQL
