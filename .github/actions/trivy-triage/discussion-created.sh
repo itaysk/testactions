@@ -17,11 +17,17 @@ label_target=$(awk -F: "/^$discussion_target/ "'{print $2}' <"$config_discussion
 label_scanner=$(awk -F: "/^$discussion_scanner/ "'{print $2}' <"$config_discussion_labels")
 
 # apply labels to discussion
-# TODO: apply all labels in one call
-# 
+addlabels_gql='mutation AddLabels($labelId: ID!, $labelableId:ID!) {
+  addLabelsToLabelable(
+    input: {labelIds: [$labelId], labelableId: $labelableId}
+  ) {
+    clientMutationId
+  }
+}'
+
 if [ "$label_target" != "" ]; then
-  gh api graphql -F query=@addLabels.gql -f labelId="$label_target" -f labelableId="$discussion_node_id"
+  gh api graphql -f query="$addlabels_gql" -f labelId="$label_target" -f labelableId="$discussion_node_id"
 fi
 if [ "$label_scanner" != "" ]; then
-  gh api graphql -F query=@addLabels.gql -f labelId="$label_scanner" -f labelableId="$discussion_node_id"
+  gh api graphql -f query="$addlabels_gql" -f labelId="$label_scanner" -f labelableId="$discussion_node_id"
 fi
