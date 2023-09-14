@@ -3,8 +3,8 @@ on:
   discussion:
     types: [created]
 jobs:
-  runs-on: ubuntu-latest
   label:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: ./actions/trivy-discussion-labeler@main
