@@ -3,6 +3,7 @@ on:
   discussion:
     types: [created]
 jobs:
+  runs-on: ubuntu-latest
   label:
     steps:
       - uses: actions/checkout@v3
