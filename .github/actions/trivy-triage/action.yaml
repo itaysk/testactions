@@ -5,7 +5,7 @@ runs:
   steps:
     - run: |
         echo '${{ toJson(github.event.discussion) }}' > ./discussion-created.json
-        config_discussion_labels=$(echo '${{ github.action_labels }}/config-discussion-labels')
+        config_discussion_labels=$(echo '${{ github.action_path }}/config-discussion-labels')
         if ! [ -f "$config_discussion_labels" ]; then
           echo "invalid discussion labels config file"
           exit 1
