@@ -4,4 +4,6 @@ on:
     types: [created]
 jobs:
   label:
-    uses: ./actions/trivy-discussion-labeler@main
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./actions/trivy-discussion-labeler@main
