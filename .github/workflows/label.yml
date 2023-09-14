@@ -4,4 +4,7 @@ on:
     types: [created]
 jobs:
   label:
-    uses: ../actions/trivy-discussion-labeler@main
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/trivy-discussion-labeler@main
