@@ -11,8 +11,8 @@ discussion_body=$(jq -r '.body' "$discussion_created_json")
 
 # find labels in discussion body
 if [ "$discussion_category_name" != 'Ideas' ]; then exit 0; fi
-discussion_target=$(awk 'BEGIN{ RS="\\\\n\\\\n" } /^### Target/ {getline; print;}' <<< "$discussion_body")
-discussion_scanner=$(awk 'BEGIN{ RS="\\\\n\\\\n" } /^### Scanner/ {getline; print;}' <<< "$discussion_body")
+discussion_target=$(awk 'BEGIN{ RS="\\\n\\\n" } /^### Target/ {getline; print;}' <<< "$discussion_body")
+discussion_scanner=$(awk 'BEGIN{ RS="\\\n\\\n" } /^### Scanner/ {getline; print;}' <<< "$discussion_body")
 label_target=$(awk "/$discussion_target/ "'{print $2}' <"$config_discussion_labels")
 label_scanner=$(awk "/$discussion_scanner/ "'{print $2}' <"$config_discussion_labels")
 
