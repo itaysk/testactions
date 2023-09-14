@@ -1,5 +1,8 @@
 name: 'trivy-discussion-triage'
 description: 'automatic triage of Trivy discussions'
+inputs:
+  config-discussion-labels:
+    description: 'path to config file for matching discussion topics to labels'
 runs:
   using: "composite"
   steps:
