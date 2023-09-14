@@ -13,8 +13,8 @@ discussion_body=$(jq -r '.body' "$discussion_created_json")
 if [ "$discussion_category_name" != 'Ideas' ]; then exit 0; fi
 discussion_target=$(awk -v RS="\\\\n\\\\n" '/^### Target/ {getline; print;}' <<< "$discussion_body")
 discussion_scanner=$(awk -v RS="\\\\n\\\\n" '/^### Scanner/ {getline; print;}' <<< "$discussion_body")
-label_target=$(awk "/$discussion_target/ "'{print $2}' <"$config_discussion_labels")
-label_scanner=$(awk "/$discussion_scanner/ "'{print $2}' <"$config_discussion_labels")
+label_target=$(awk -F: "/^$discussion_target/ "'{print $2}' <"$config_discussion_labels")
+label_scanner=$(awk -F: "/^$discussion_scanner/ "'{print $2}' <"$config_discussion_labels")
 
 # apply labels to discussion
 # TODO: apply all labels in one call
