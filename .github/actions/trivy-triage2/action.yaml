@@ -13,5 +13,5 @@ runs:
       uses: actions/github-script@v6
       with:
         script: |
-          const script = require('./index.js');
+          const script = require('${{ github.action_path }}/index.js');
           await console.log(script({github, context, core}, ${{ inputs.discussion_num }}));
