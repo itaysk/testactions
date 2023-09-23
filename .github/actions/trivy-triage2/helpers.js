@@ -1,0 +1,71 @@
+module.exports = {
+    detectDiscussionLabels: (discussion, configDiscussionLabels) => {
+        res = [];
+        const discussionId = discussion.id;
+        const category = discussion.category.name;
+        const body = discussion.body;
+        if (category !== "Ideas") {
+            consolt.log("skipping discussion with category ${category} and body ${body}");
+        }
+        const scannerPattern = /### Scanner\n\n(.+)\n/;
+        const scannerFound = body.match(scannerPattern);
+        const scannerLabel = scannerFound[1];
+        if (scannerLabel) {
+            res.push(configDiscussionLabels[scannerLabel]);
+        }
+        const targetPattern = /### Target\n\n(.+)\n/;
+        const targetFound = body.match(targetPattern);
+        const targetLabel = targetFound[1];
+        if (targetLabel) {
+            res.push(configDiscussionLabels[targetLabel]);
+        }
+        return res;
+    },
+    fetchDiscussion: async (github, discussionNumber) => {
+        const query = `query Discussion ($owner: String!, $repo: String!, $discussion_num: Int!){
+            repository(name: $repo, owner: $owner) {
+                discussion(number: $discussion_num) {
+                    number,
+                    id,
+                    body,
+                    category {
+                        id,
+                        name
+                    },
+                    labels(first: 100) {
+                        edges {
+                            node {
+                                id,
+                                name
+                            }
+                        }
+                    }
+                }
+            }
+        }`;
+        const vars = {
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            discussion_num: discussionNum
+        };
+        return github.graphql(query, vars);
+    },
+    labelDiscussion: async (github, discussionId, labelIds) => {
+        const query = `mutation AddLabels($labelId: ID!, $labelableId:ID!) {
+            addLabelsToLabelable(
+                input: {labelIds: [$labelId], labelableId: $labelableId}
+            ) {
+                clientMutationId
+            }
+        }`;
+        // TODO: add all labels in one call
+        labelIds.forEach((labelId) => {
+            const vars = {
+                labelId: labelId,
+                labelableId: discussionId
+            };
+            github.graphql(query, vars);
+        });
+    }
+};
+

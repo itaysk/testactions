@@ -13,5 +13,15 @@ runs:
       uses: actions/github-script@v6
       with:
         script: |
-          const script = require('${{ github.action_path }}/index.js');
-          await console.log(script({github, context, core}, ${{ inputs.discussion_num }}));
+          const {detectDiscussionLabels, fetchDiscussion, labelDiscussion } = require('${{ github.action_path }}/helpers.js');
+          const config = require('${{ github.action_path }}/config.json');
+          let discussion;
+          if (${{ inputs.discussion_num }}) {
+              discussion = (await api.fetchDiscussion(discussionNum)).repository.discussion;
+          } else {
+              discussion = context.payload.discussion;
+          }
+          const labels = detectDiscussionLabels(discussion, config.discussionLabels);
+          if labels.length > 0 {
+            labelDiscussion(github, discussionId, labels);
+          }
