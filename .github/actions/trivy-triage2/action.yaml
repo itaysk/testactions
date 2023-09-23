@@ -22,6 +22,7 @@ runs:
           } else {
               discussion = context.payload.discussion;
           }
+          console.log(discussion);
           const labels = detectDiscussionLabels(discussion, config.discussionLabels);
           if (labels.length > 0) {
             labels.forEach(labelId => {
