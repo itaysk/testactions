@@ -13,4 +13,4 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/trivy-triage2
         with:
-          discussion_id: ${{ github.event.inputs.discussion_num }}
+          discussion_num: ${{ github.event.inputs.discussion_num }}
