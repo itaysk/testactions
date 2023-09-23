@@ -14,9 +14,28 @@ runs:
           const category = discussion.category.name;
           const body = discussion.body;
 
-          if (category === "Ideas") {
-            if (body.includes("### Scanner\n\nVulnerability")) {
-              await github.rest.discussions.addLabels({
+          if (category !== "Ideas") {
+            consolt.log("skipping discussion with category ${category} and body ${body}");
+          }
+          
+          if (body.includes("### Scanner\n\nVulnerability")) { }
+          
+          const query = 'mutation AddLabels($labelId: ID!, $labelableId:ID!) {
+            addLabelsToLabelable(
+              input: {labelIds: [$labelId], labelableId: $labelableId}
+            ) {
+              clientMutationId
+            }
+          }';
+          const variables = {
+            labelId: '',
+            labelableId: ''
+          };
+          const result = await github.graphqk(query, variables);
+          constole.log(result);
+
+              query: 
+              await github.request("POST" /graphql",{
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 discussion_number: discussionNumber,
