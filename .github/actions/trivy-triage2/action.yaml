@@ -1,5 +1,9 @@
 name: 'trivy-discussion-triage'
 description: 'automatic triage of Trivy discussions'
+inputs:
+  discussion_num:
+    description: 'which discussion to triage'
+    required: false
 runs:
   using: "composite"
   steps:
@@ -9,38 +13,5 @@ runs:
       uses: actions/github-script@v6
       with:
         script: |
-          const discussion = context.payload.discussion;
-          const discussionNumber = discussion.number;
-          const category = discussion.category.name;
-          const body = discussion.body;
-
-          if (category !== "Ideas") {
-            consolt.log("skipping discussion with category ${category} and body ${body}");
-          }
-          
-          if (body.includes("### Scanner\n\nVulnerability")) { }
-          
-          const query = 'mutation AddLabels($labelId: ID!, $labelableId:ID!) {
-            addLabelsToLabelable(
-              input: {labelIds: [$labelId], labelableId: $labelableId}
-            ) {
-              clientMutationId
-            }
-          }';
-          const variables = {
-            labelId: '',
-            labelableId: ''
-          };
-          const result = await github.graphqk(query, variables);
-          constole.log(result);
-
-              query: 
-              await github.request("POST" /graphql",{
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                discussion_number: discussionNumber,
-                labels: ['scan/vulnerability']
-              });
-              console.log(`Added "scan/vulnerability" label to discussion #${discussionNumber}.`);
-            }
-          }
+          const script = require('./index.js');
+          await console.log(script({github, context, core}, ${{ inputs.discussion_num }}));
