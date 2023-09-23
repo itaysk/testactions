@@ -18,7 +18,7 @@ runs:
           discussionNum = parseInt(${{ inputs.discussion_num }});
           let discussion;
           if (discussionNum > 0) {
-              discussion = (await fetchDiscussion(github, discussionNum)).repository.discussion;
+              discussion = (await fetchDiscussion(github, context.repo.repo, context.repo.owner, discussionNum)).repository.discussion;
           } else {
               discussion = context.payload.discussion;
           }

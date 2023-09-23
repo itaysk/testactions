@@ -21,7 +21,7 @@ module.exports = {
         }
         return res;
     },
-    fetchDiscussion: async (github, discussionNumber) => {
+    fetchDiscussion: async (github, owner, repo, discussionNum) => {
         const query = `query Discussion ($owner: String!, $repo: String!, $discussion_num: Int!){
             repository(name: $repo, owner: $owner) {
                 discussion(number: $discussion_num) {
@@ -44,8 +44,8 @@ module.exports = {
             }
         }`;
         const vars = {
-            owner: context.repo.owner,
-            repo: context.repo.repo,
+            owner: owner,
+            repo: repo,
             discussion_num: discussionNum
         };
         return github.graphql(query, vars);
