@@ -52,7 +52,7 @@ module.exports = async ({github, context, core}, discussionNum) => {
         };
         const discussionRes = await github.graphql(queryDiscussion, queryDiscussionVars);
         console.log(discussionRes);
-        discussion = discussionRes.data.repository.discussion;
+        discussion = discussionRes.repository.discussion;
     }
     const discussionNumber = discussion.number;
     const category = discussion.category.name;
