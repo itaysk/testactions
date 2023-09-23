@@ -3,24 +3,25 @@ description: 'automatic triage of Trivy discussions'
 runs:
   using: "composite"
   steps:
+    - name: Conditionally label discussions based on category and content
       env:
         GH_TOKEN: ${{ github.token }}
-    - name: Conditionally label discussions based on category and content
       uses: actions/github-script@v6
-      with: |
-        const discussion = context.payload.discussion;
-        const discussionNumber = discussion.number;
-        const category = discussion.category.name;
-        const body = discussion.body;
+      with:
+        script: |
+          const discussion = context.payload.discussion;
+          const discussionNumber = discussion.number;
+          const category = discussion.category.name;
+          const body = discussion.body;
 
-        if (category === "Ideas") {
-          if (body.includes("### Scanner\n\nVulnerability")) {
-            await github.rest.discussions.addLabels({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              discussion_number: discussionNumber,
-              labels: ['scan/vulnerability']
-            });
-            console.log(`Added "scan/vulnerability" label to discussion #${discussionNumber}.`);
+          if (category === "Ideas") {
+            if (body.includes("### Scanner\n\nVulnerability")) {
+              await github.rest.discussions.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                discussion_number: discussionNumber,
+                labels: ['scan/vulnerability']
+              });
+              console.log(`Added "scan/vulnerability" label to discussion #${discussionNumber}.`);
+            }
           }
-        }
