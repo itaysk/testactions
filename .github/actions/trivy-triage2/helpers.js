@@ -9,15 +9,13 @@ module.exports = {
         }
         const scannerPattern = /### Scanner\n\n(.+)\n/;
         const scannerFound = body.match(scannerPattern);
-        const scannerLabel = scannerFound[1];
-        if (scannerLabel) {
-            res.push(configDiscussionLabels[scannerLabel]);
+        if (scannerFound && scannerFound.length > 1) {
+            res.push(configDiscussionLabels[scannerFound[1]]);
         }
         const targetPattern = /### Target\n\n(.+)\n/;
         const targetFound = body.match(targetPattern);
-        const targetLabel = targetFound[1];
-        if (targetLabel) {
-            res.push(configDiscussionLabels[targetLabel]);
+        if (targetFound && targetFound.length > 1) {
+            res.push(configDiscussionLabels[targetFound[1]]);
         }
         return res;
     },
