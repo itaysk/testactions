@@ -17,7 +17,7 @@ runs:
           const config = require('${{ github.action_path }}/config.json');
           let discussion;
           if (${{ inputs.discussion_num }}) {
-              discussion = (await api.fetchDiscussion(discussionNum)).repository.discussion;
+              discussion = (await fetchDiscussion(discussionNum)).repository.discussion;
           } else {
               discussion = context.payload.discussion;
           }
