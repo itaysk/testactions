@@ -22,6 +22,9 @@ runs:
               discussion = context.payload.discussion;
           }
           const labels = detectDiscussionLabels(discussion, config.discussionLabels);
-          if labels.length > 0 {
-            labelDiscussion(github, discussionId, labels);
+          if (labels.length > 0) {
+            labels.forEach(labelId => {
+              console.log(`Adding label ${labelId} to discussion ${discussion.id}`);
+              labelDiscussion(github, discussion.id, labelId);
+            });
           }
