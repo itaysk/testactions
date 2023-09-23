@@ -51,7 +51,7 @@ module.exports = async ({github, context, core}, discussionNum) => {
             discussion_num: discussionNum
         };
         const discussionRes = await github.graphql(queryDiscussion, queryDiscussionVars);
-        constole.log(discussionRes);
+        console.log(discussionRes);
         discussion = discussionRes.data.repository.discussion;
     }
     const discussionNumber = discussion.number;
@@ -82,6 +82,6 @@ module.exports = async ({github, context, core}, discussionNum) => {
             labelableId: ''
         };
         const result = await github.graphql(mutationAddLabels, mutationAddLabelsVars);
-        constole.log(result);
+        console.log(result);
     }
 }
