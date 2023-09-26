@@ -31,6 +31,17 @@ describe('trivy-triage', async function() {
       const labels = detectDiscussionLabels(discussion, configDiscussionLabels);
       assert(labels.includes('ContainerImageLabel'));
     });
+    it('detect scanner and target labels', async function() {
+      const discussion = {
+        body: 'hello hello\nbla bla.\n### Scanner\n\nVulnerability\n### Target\n\nContainer Image\nbye bye.', 
+        category: {
+          name: 'Ideas'
+        }
+      };
+      const labels = detectDiscussionLabels(discussion, configDiscussionLabels);
+      assert(labels.includes('ContainerImageLabel'));
+      assert(labels.includes('VulnerabilityLabel'));
+    });
     it('not detect other labels', async function() {
       const discussion = {
         body: 'hello hello\nbla bla.\n### Scanner\n\nVulnerability\n### Target\n\nContainer Image\nbye bye.', 
