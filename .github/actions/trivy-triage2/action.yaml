@@ -25,6 +25,6 @@ runs:
           console.log(discussion);
           const labels = detectDiscussionLabels(discussion, config.discussionLabels);
           if (labels.length > 0) {
-              console.log(`Adding labels ${labels} to discussion ${discussion.id}`);
-              labelDiscussion(github, discussion.id, labels);
+              console.log(`Adding labels ${labels} to discussion ${discussion.node_id}`);
+              labelDiscussion(github, discussion.node_id, labels);
           }
