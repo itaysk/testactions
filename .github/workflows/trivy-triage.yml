@@ -11,6 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: ./.github/actions/trivy-triage2
+      - uses: ./.github/actions/trivy-triage
         with:
           discussion_num: ${{ github.event.inputs.discussion_num }}
