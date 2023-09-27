@@ -7,12 +7,12 @@ module.exports = {
         if (category !== "Ideas") {
             consolt.log("skipping discussion with category ${category} and body ${body}");
         }
-        const scannerPattern = /### Scanner\n\n(.+)\n/;
+        const scannerPattern = /### Scanner\n\n(.+)/;
         const scannerFound = body.match(scannerPattern);
         if (scannerFound && scannerFound.length > 1) {
             res.push(configDiscussionLabels[scannerFound[1]]);
         }
-        const targetPattern = /### Target\n\n(.+)\n/;
+        const targetPattern = /### Target\n\n(.+)/;
         const targetFound = body.match(targetPattern);
         if (targetFound && targetFound.length > 1) {
             res.push(configDiscussionLabels[targetFound[1]]);
