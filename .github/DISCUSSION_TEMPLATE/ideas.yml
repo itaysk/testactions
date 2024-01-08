@@ -48,10 +48,6 @@ body:
       description: "debugg"
       value: |
         yoyoyo
-    render: text
-  validations:
-    required: true
-
   - type: markdown
     attributes:
       value: |
