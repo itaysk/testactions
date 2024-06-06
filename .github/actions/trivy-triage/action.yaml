@@ -2,7 +2,7 @@ name: 'trivy-discussion-triage'
 description: 'automatic triage of Trivy discussions'
 inputs:
   discussion_num:
-    description: 'which discussion to triage'
+    description: 'Discussion number to triage'
     required: false
 runs:
   using: "composite"
@@ -22,7 +22,6 @@ runs:
           } else {
               discussion = context.payload.discussion;
           }
-          console.log(discussion);
           const labels = detectDiscussionLabels(discussion, config.discussionLabels);
           if (labels.length > 0) {
               console.log(`Adding labels ${labels} to discussion ${discussion.node_id}`);
