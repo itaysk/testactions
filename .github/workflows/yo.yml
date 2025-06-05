@@ -1,0 +1,16 @@
+name: Test
+on:
+  pull_request:
+    paths-ignore:
+    - '**.md'
+    - 'docs/**'
+    - 'mkdocs.yml'
+    - 'LICENSE'
+    - '.release-please-manifest.json' ## don't run tests for release-please PRs
+    - 'helm/trivy/Chart.yaml'
+jobs:
+  yo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: yo
+        run: echo yo
